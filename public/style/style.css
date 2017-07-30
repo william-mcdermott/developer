@@ -1,0 +1,29 @@
+.heading {
+  text-align: center;
+}
+.message {
+  padding-left: 25px;
+}
+.subject {
+  border: 1px solid #bad1b0;
+  margin: 0 0 5px 5px;
+  padding-left: 5px;
+}
+.subject:hover {
+  background-color: #bad1b0;
+}
+body {
+  background-color: #e4ede0
+}
+select {
+  margin-bottom: 20px;
+}
+.glyphicon-calendar {
+  padding-left: 25px;
+}
+.glyphicon-map-marker {
+  padding: 0;
+}
+h3 {
+  margin-top: 10px;
+}

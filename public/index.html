@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html ng-app="jobApp" ng-controller="JobListingController">
+  <head>
+    <title>Full Stack Software Developer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/filters.js"></script>
+    <script type="text/javascript" src="./js/controller.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var rows = [];
+        for (var key in job.profile) {
+          var newArray = [];
+          newArray.push(key);
+          newArray.push(job.profile[key]);
+          rows.push(newArray);
+        }
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'task');
+        data.addColumn('number', 'percent');
+        data.addRows(rows);
+        var options = {'title':'Your Workday',
+          'width':400,
+          'height':300,
+          'backgroundColor': {
+            'fill': 'transparent'
+          },
+          'pieSliceText': 'none',
+          'tooltip': {
+            'text': 'percentage'
+          },
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      };
+    </script>
+  </head>
+  <body>
+    <div class="heading">
+      <h1>{{job.headline}}</h1>
+      <h3>{{job.essentials.employment}} position</h3>
+      <h3><span class="glyphicon glyphicon-map-marker"></span>{{job.essentials.locations | capitalize}}<span class="glyphicon glyphicon-calendar"></span>{{job.essentials.startdate | date : 'MMMM d, yyyy'}}</h3>
+      <h5>Company Size: {{job.essentials.companysize | companySize}}</h5>
+      <h5>Team Size: {{job.essentials.teamsize.min}} to {{job.essentials.teamsize.max}}</h5>
+      <select name="skillLevelSelect" ng-model="skillLevel">
+        <option value="">----Please select your skill level----</option>
+        <option ng-repeat="skill in job.essentials.experience" value="{{skill.toLowerCase()}}">{{skill}}</option>
+      </select>
+    </div>
+      <div class="col-md-1">
+
+      </div>
+      <div class="col-md-5">
+        <div class="subject" ng-click="showMethodology = !showMethodology">
+          <h4>Our methodology includes...<span ng-show="!showMethodology" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showMethodology" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <ul ng-show="showMethodology">
+            <li ng-repeat="(methodology, value) in job.methodology">{{methodology | renderLists}}{{value | renderListValue}}</li>
+          </ul>
+        </div>
+        <div class="subject" ng-click="showSpecs = !showSpecs">
+          <h4>Job specs: <span ng-show="!showSpecs" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showSpecs" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <ul ng-show="showSpecs">
+            <li ng-repeat="(spec, value) in job.specs">{{spec | renderLists}}{{value | renderListValue}}</li>
+          </ul>
+        </div>
+        <div class="subject" ng-click="showProfile = !showProfile">
+          <h4>Job profile: <span ng-show="!showProfile" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showProfile" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <div ng-show="showProfile" id="chart_div"></div>
+        </div>
+        <div class="subject" ng-click="showEquipment = !showEquipment">
+          <h4>Equipment we use: <span ng-show="!showEquipment" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showEquipment" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <ul ng-show="showEquipment">
+            <li ng-repeat="(equipment, value) in job.equipment">{{equipment | renderLists}}{{value | renderListValue}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="subject" ng-click="showFamiliarity = !showFamiliarity">
+          <h4>Your familiarity level with these topics: <span ng-show="!showFamiliarity" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showFamiliarity" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <div ng-show="!skillLevel && showFamiliarity">
+            <h5 class="message">Please select your skill level above.</h5>
+          </div>
+          <div ng-show="skillLevel && showFamiliarity">
+            <ul>
+              <li ng-repeat="(technology, skill) in job.technologies[skillLevel]">{{technology}}: {{skill | renderTechnologies}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="subject" ng-click="showBonus = !showBonus">
+          <h4>You get bonus points for: <span ng-show="!showBonus" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showBonus" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <ul ng-show="showBonus">
+            <li ng-repeat="(topic, value) in job.bonuspoints">{{topic | renderLists}}{{value | renderListValue}}</li>
+          </ul>
+        </div>
+        <div class="subject" ng-click="showOther = !showOther">
+          <h4>A little about us: <span ng-show="!showOther" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showOther" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <p ng-show="showOther" class="message">{{job.other | showAsList}}</p>
+        </div>
+        <div class="subject" ng-click="showMisc = !showMisc">
+          <h4>Benefits of the job: <span ng-show="!showMisc" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showMisc" class="glyphicon glyphicon-triangle-bottom"></span></h4>
+          <ul ng-show="showMisc">
+            <li ng-repeat="(item, value) in job.misc" ng-show="job.misc[item]">{{item | renderLists}}{{value | renderListValue}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+  </body>
+</html>
