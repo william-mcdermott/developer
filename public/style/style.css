@@ -5,9 +5,20 @@
   padding-left: 25px;
 }
 .subject {
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  overflow: hidden;
+  max-height: 100px;
   border: 1px solid #bad1b0;
+  border-radius: 25px;
   margin: 0 0 5px 5px;
-  padding-left: 5px;
+  padding-left: 25px;
+}
+.subject.show {
+  max-height: 300px;
 }
 .subject:hover {
   background-color: #bad1b0;

@@ -59,23 +59,23 @@
 
       </div>
       <div class="col-md-5">
-        <div class="subject" ng-click="showMethodology = !showMethodology">
+        <div class="subject" ng-class="{'show': showMethodology}" ng-click="showMethodology = !showMethodology">
           <h4>Our methodology includes...<span ng-show="!showMethodology" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showMethodology" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <ul ng-show="showMethodology">
             <li ng-repeat="(methodology, value) in job.methodology">{{methodology | renderLists}}{{value | renderListValue}}</li>
           </ul>
         </div>
-        <div class="subject" ng-click="showSpecs = !showSpecs">
+        <div class="subject" ng-class="{'show': showSpecs}" ng-click="showSpecs = !showSpecs">
           <h4>Job specs: <span ng-show="!showSpecs" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showSpecs" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <ul ng-show="showSpecs">
             <li ng-repeat="(spec, value) in job.specs">{{spec | renderLists}}{{value | renderListValue}}</li>
           </ul>
         </div>
-        <div class="subject" ng-click="showProfile = !showProfile">
+        <div class="subject" ng-class="{'show': showProfile}" ng-click="showProfile = !showProfile">
           <h4>Job profile: <span ng-show="!showProfile" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showProfile" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <div ng-show="showProfile" id="chart_div"></div>
         </div>
-        <div class="subject" ng-click="showEquipment = !showEquipment">
+        <div class="subject" ng-class="{'show': showEquipment}" ng-click="showEquipment = !showEquipment">
           <h4>Equipment we use: <span ng-show="!showEquipment" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showEquipment" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <ul ng-show="showEquipment">
             <li ng-repeat="(equipment, value) in job.equipment">{{equipment | renderLists}}{{value | renderListValue}}</li>
@@ -83,7 +83,7 @@
         </div>
       </div>
       <div class="col-md-5">
-        <div class="subject" ng-click="showFamiliarity = !showFamiliarity">
+        <div class="subject" ng-class="{'show': showFamiliarity}" ng-click="showFamiliarity = !showFamiliarity">
           <h4>Your familiarity level with these topics: <span ng-show="!showFamiliarity" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showFamiliarity" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <div ng-show="!skillLevel && showFamiliarity">
             <h5 class="message">Please select your skill level above.</h5>
@@ -94,17 +94,17 @@
             </ul>
           </div>
         </div>
-        <div class="subject" ng-click="showBonus = !showBonus">
+        <div class="subject" ng-class="{'show': showBonus}" ng-click="showBonus = !showBonus">
           <h4>You get bonus points for: <span ng-show="!showBonus" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showBonus" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <ul ng-show="showBonus">
             <li ng-repeat="(topic, value) in job.bonuspoints">{{topic | renderLists}}{{value | renderListValue}}</li>
           </ul>
         </div>
-        <div class="subject" ng-click="showOther = !showOther">
+        <div class="subject" ng-class="{'show': showOther}" ng-click="showOther = !showOther">
           <h4>A little about us: <span ng-show="!showOther" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showOther" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <p ng-show="showOther" class="message">{{job.other | showAsList}}</p>
         </div>
-        <div class="subject" ng-click="showMisc = !showMisc">
+        <div class="subject" ng-class="{'show': showMisc}" ng-click="showMisc = !showMisc">
           <h4>Benefits of the job: <span ng-show="!showMisc" class="glyphicon glyphicon-triangle-right"></span><span ng-show="showMisc" class="glyphicon glyphicon-triangle-bottom"></span></h4>
           <ul ng-show="showMisc">
             <li ng-repeat="(item, value) in job.misc" ng-show="job.misc[item]">{{item | renderLists}}{{value | renderListValue}}</li>
